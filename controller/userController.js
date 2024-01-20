@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const UserModal = require("../model/userModel");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const catchAsync = require("../utils/catchAsync");
 const AppError = require("../utils/appError");
 
