@@ -7,6 +7,7 @@ const cors = require("cors");
 const AppError = require("./utils/appError");
 const globalErrorHandler = require("./controller/errorController");
 const cookieParser = require("cookie-parser");
+const serverless = require("serverless-http");
 
 // ********************************************
 
@@ -35,9 +36,9 @@ app.use(express.json());
 // middleware for cookies
 app.use(cookieParser());
 
-app.use("/api/v1/user/auth", authRouter);
-app.use("/api/v1/user", userRouter);
-app.use("/api/v1/property",propertyRouter)
+app.use("/.netlify/functions/api/v1/user/auth", authRouter);
+app.use("/.netlify/functions/api/v1/user", userRouter);
+app.use("/.netlify/functions/api/v1/property",propertyRouter)
 
 app.all("*", (req, res, next) => {
   // res.status(404).send({
@@ -57,3 +58,4 @@ app.all("*", (req, res, next) => {
 app.use(globalErrorHandler);
 
 module.exports = app;
+module.exports.handler = serverless(app);
