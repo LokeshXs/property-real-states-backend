@@ -14,7 +14,7 @@ const cookieParser = require("cookie-parser");
 const app = express();
 
 const corsOptions ={
-  origin:['http://localhost:5173','https://real-state-frontend-lokeshxs.vercel.app/'], 
+  origin:['http://localhost:5173','https://real-state-frontend-lokeshxs.vercel.app'], 
   credentials:true,            //access-control-allow-credentials:true
   optionSuccessStatus:200
 }
