@@ -14,7 +14,7 @@ const cookieParser = require("cookie-parser");
 const app = express();
 
 const corsOptions ={
-  origin:['http://localhost:5173',"https://main--celadon-croissant-c99bf1.netlify.app"], 
+  origin:['http://localhost:5173',"https://celadon-croissant-c99bf1.netlify.app/"], 
   credentials:true,            //access-control-allow-credentials:true
   optionSuccessStatus:200
 }
