@@ -254,7 +254,7 @@ const forgotPassword = catchAsync(async (req, res, next) => {
   console.log(updated);
 
   // 3.) send it to user's email
-  const resetURL = `http://localhost:5173/reset-password/${resetToken}`;
+  const resetURL = `${process.env.FRONTEND_URL}/reset-password/${resetToken}`;
 
   const message = `Click on the link below to reset your password. Valid for 10 mins\n ${resetURL}`;
 
@@ -283,9 +283,10 @@ const forgotPassword = catchAsync(async (req, res, next) => {
 
 const resetPassword = catchAsync(async (req, res, next) => {
   // 1.) get user based on the token
-
+console.log(req.params.resetToken)
   const token = req.params.resetToken;
   const hashedToken = crypto.createHash("sha256").update(token).digest("hex");
+  console.log(hashedToken)
 
   const user = await UserModal.findOne({
     passwordResetToken: hashedToken,
@@ -297,7 +298,13 @@ const resetPassword = catchAsync(async (req, res, next) => {
   // 2.) if token has not expired and there is a user , set the user password
 
   if (!user) {
+
+    user.passwordResetToken = undefined;
+    user.passwordResetExpires = undefined;
     return next(new AppError("Token is invalid or has expired", 400)); // "400" typically refers to the HTTP status code "Bad Request." This code is returned by a server when the client's request cannot be processed due to a client error
+
+   
+  
   }
 
   user.password = req.body.newPassword;
