@@ -7,12 +7,16 @@ const cors = require("cors");
 const AppError = require("./utils/appError");
 const globalErrorHandler = require("./controller/errorController");
 const cookieParser = require("cookie-parser");
+const dotenv = require("dotenv");
 
 
 // ********************************************
 
 const app = express();
-
+// Configuring the .env file to get access to it
+dotenv.config({
+  path: "./config.env",
+});
 const corsOptions ={
   origin:['http://localhost:5173',process.env.FRONTEND_URL], 
   credentials:true,            //access-control-allow-credentials:true
@@ -29,7 +33,7 @@ app.use(
     legacyHeaders: false,
   })
 );
-
+console.log(process.env.FRONTEND_URL)
 // middleware for json
 app.use(express.json());
 
