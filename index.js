@@ -18,7 +18,7 @@ dotenv.config({
   path: "./config.env",
 });
 const corsOptions ={
-  origin:['http://localhost:5173',process.env.FRONTEND_URL], 
+  origin:['http://localhost:5173',"https://aashiyanaave.netlify.app"], 
   credentials:true,            //access-control-allow-credentials:true
   optionSuccessStatus:200
 }
